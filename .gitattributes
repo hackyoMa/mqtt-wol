@@ -1,0 +1,17 @@
+*                 text=auto
+
+*.java            text diff=java
+*.xml             text
+*.yml             text
+*.yaml            text
+*.properties      text
+*.config          text
+*.pfx             binary
+
+*.json            text
+
+.gitattributes    text
+*.*ignore         text
+*.md              text diff=markdown
+LICENSE           text
+CODEOWNERS        text

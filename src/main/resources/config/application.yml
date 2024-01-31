@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: mqtt-wol
+  config:
+    # Configuration file path
+    import: optional:file:${CA_CONFIG_FILE:/opt/mqtt_wol/conf.properties}
