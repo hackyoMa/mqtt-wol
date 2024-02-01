@@ -1,18 +1,18 @@
 logging:
   level:
-    root: ${ca_log_level:INFO}
+    root: ${mw_log_level:INFO}
   file:
-    name: ${ca_log_dir:/opt/mqtt_wol/logs}/log.log
+    name: ${mw_log_dir:/opt/mqtt_wol/logs}/log.log
 mqtt:
-  server_uri: ${mqtt_server_uri:tcp://bemfa.com:9503}
-  client_id: ${mqtt_client_id:cba8e6b25bb2ad84b9ad132fa8364b83}
-  version: ${mqtt_version:3}
-  topic: ${mqtt_topic:pc006}
+  server_uri: ${mw_mqtt_server_uri:tcp://bemfa.com:9503}
+  client_id: ${mw_mqtt_client_id:cba8e6b25bb2ad84b9ad132fa8364b83}
+  version: ${mw_mqtt_version:3}
+  topic: ${mw_mqtt_topic:pc006}
 wol:
-  address: ${wol_address:192.168.1.10}
-  mac_address: ${wol_mac_address:fa:16:3e:8b:e3:ef}
+  address: ${mw_wol_address:192.168.1.10}
+  mac_address: ${mw_wol_mac_address:fa:16:3e:8b:e3:ef}
 winrm:
-  address: ${winrm_address:192.168.1.10}
-  port: ${winrm_port:5985}
-  username: ${winrm_username:winrm}
-  password: ${winrm_password:pa55w0rd!}
+  address: ${mw_winrm_address:192.168.1.10}
+  port: ${mw_winrm_port:5985}
+  username: ${mw_winrm_username:winrm}
+  password: ${mw_winrm_password:pa55w0rd!}
