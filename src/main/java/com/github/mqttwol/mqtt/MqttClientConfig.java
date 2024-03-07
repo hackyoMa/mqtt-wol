@@ -29,12 +29,12 @@ public class MqttClientConfig {
     @Bean
     public ClientManager<IMqttAsyncClient, MqttConnectOptions> clientManager() {
         MqttConnectOptions connectOptions = new MqttConnectOptions();
-        connectOptions.setServerURIs(new String[]{mqttProperties.getServerUri()});
-        connectOptions.setMqttVersion(mqttProperties.getVersion());
+        connectOptions.setServerURIs(new String[]{this.mqttProperties.getServerUri()});
+        connectOptions.setMqttVersion(this.mqttProperties.getVersion());
         connectOptions.setAutomaticReconnect(true);
         connectOptions.setMaxReconnectDelay(1000);
         connectOptions.setConnectionTimeout(60000);
-        Mqttv3ClientManager clientManager = new Mqttv3ClientManager(connectOptions, mqttProperties.getClientId());
+        Mqttv3ClientManager clientManager = new Mqttv3ClientManager(connectOptions, this.mqttProperties.getClientId());
         clientManager.setPersistence(new MqttDefaultFilePersistence());
         return clientManager;
     }

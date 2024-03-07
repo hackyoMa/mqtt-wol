@@ -33,10 +33,10 @@ public class MqttWolService {
             return;
         }
         if (MSG_TYPE_ON.equalsIgnoreCase(message)) {
-            WolUtils.powerOn(wolProperties.getAddress(), wolProperties.getMacAddress());
+            WolUtils.powerOn(this.wolProperties.getAddress(), this.wolProperties.getMacAddress());
         }
         if (MSG_TYPE_OFF.equalsIgnoreCase(message)) {
-            WinRMUtils.powerOff(winRMProperties.getAddress(), winRMProperties.getPort(), winRMProperties.getUsername(), winRMProperties.getPassword());
+            WinRMUtils.powerOff(this.winRMProperties.getAddress(), this.winRMProperties.getPort(), this.winRMProperties.getUsername(), this.winRMProperties.getPassword());
         }
     }
 

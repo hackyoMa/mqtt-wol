@@ -44,7 +44,7 @@ public class MqttInboundConfig {
 
     @Bean
     public MessageProducer inbound(MessageChannel mqttInputChannel) {
-        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(clientManager, mqttProperties.getTopic());
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(this.clientManager, this.mqttProperties.getTopic());
         adapter.setQos(0);
         adapter.setOutputChannel(mqttInputChannel);
         return adapter;
@@ -53,7 +53,7 @@ public class MqttInboundConfig {
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
-        return message -> mqttWolService.handle((String) message.getPayload());
+        return message -> this.mqttWolService.handle((String) message.getPayload());
     }
 
 }
