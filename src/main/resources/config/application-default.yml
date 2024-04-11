@@ -4,9 +4,10 @@ logging:
   level:
     root: ${MW_LOG_LEVEL:INFO}
 mqtt:
-  server_uri: ${MW_MQTT_SERVER_URI:tcp://bemfa.com:9501}
   client_id: ${MW_MQTT_CLIENT_ID:cba8e6b25bb2ad84b9ad132fa8364b83}
-  version: ${MW_MQTT_VERSION:3}
+  server_host: ${MW_MQTT_SERVER_HOST:bemfa.com}
+  server_port: ${MW_MQTT_SERVER_PORT:9503}
+  server_ssl: ${MW_MQTT_SERVER_SSL:true}
   topic: ${MW_MQTT_TOPIC:pc006}
 wol:
   address: ${MW_WOL_ADDRESS:192.168.1.10}
