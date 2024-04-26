@@ -1,6 +1,5 @@
 package com.github.mqttwol;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -11,15 +10,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @since 2022/4/1
  */
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class).run(args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        Thread.currentThread().join();
     }
 
 }

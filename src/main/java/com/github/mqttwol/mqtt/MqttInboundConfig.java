@@ -2,14 +2,18 @@ package com.github.mqttwol.mqtt;
 
 import com.github.mqttwol.common.MqttProperties;
 import com.github.mqttwol.service.MqttWolService;
-import com.hivemq.client.mqtt.datatypes.MqttQos;
-import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
-import com.hivemq.client.mqtt.mqtt3.message.publish.Mqtt3Publish;
+import org.eclipse.paho.client.mqttv3.IMqttAsyncClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.nio.charset.StandardCharsets;
-import java.util.function.Consumer;
+import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.core.MessageProducer;
+import org.springframework.integration.mqtt.core.ClientManager;
+import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHandler;
 
 /**
  * MqttInboundConfig
@@ -18,27 +22,38 @@ import java.util.function.Consumer;
  * @since 2022/4/1
  */
 @Configuration
-public class MqttInboundConfig implements Consumer<Mqtt3Publish> {
+public class MqttInboundConfig {
 
+    private final MqttProperties mqttProperties;
+    private final ClientManager<IMqttAsyncClient, MqttConnectOptions> clientManager;
     private final MqttWolService mqttWolService;
 
     @Autowired
     public MqttInboundConfig(MqttProperties mqttProperties,
-                             Mqtt3AsyncClient mqttClient,
+                             ClientManager<IMqttAsyncClient, MqttConnectOptions> clientManager,
                              MqttWolService mqttWolService) {
+        this.mqttProperties = mqttProperties;
+        this.clientManager = clientManager;
         this.mqttWolService = mqttWolService;
-        mqttClient
-                .toAsync()
-                .subscribeWith()
-                .topicFilter(mqttProperties.getTopic())
-                .qos(MqttQos.AT_LEAST_ONCE)
-                .callback(this)
-                .send();
     }
 
-    @Override
-    public void accept(Mqtt3Publish mqtt3Publish) {
-        this.mqttWolService.handle(new String(mqtt3Publish.getPayloadAsBytes(), StandardCharsets.UTF_8));
+    @Bean
+    public MessageChannel mqttInputChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    public MessageProducer inbound(MessageChannel mqttInputChannel) {
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(this.clientManager, this.mqttProperties.getTopic());
+        adapter.setQos(0);
+        adapter.setOutputChannel(mqttInputChannel);
+        return adapter;
+    }
+
+    @Bean
+    @ServiceActivator(inputChannel = "mqttInputChannel")
+    public MessageHandler handler() {
+        return message -> this.mqttWolService.handle((String) message.getPayload());
     }
 
 }
