@@ -50,4 +50,14 @@ public class WinRMProperties {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "WinRM配置：{" +
+                "address='" + address + '\'' +
+                ", port=" + port +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
 }

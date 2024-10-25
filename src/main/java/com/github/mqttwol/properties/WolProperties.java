@@ -32,4 +32,12 @@ public class WolProperties {
         this.macAddress = macAddress;
     }
 
+    @Override
+    public String toString() {
+        return "Wol配置：{" +
+                "address='" + address + '\'' +
+                ", macAddress='" + macAddress + '\'' +
+                '}';
+    }
+
 }

@@ -59,4 +59,15 @@ public class MqttProperties {
         this.topic = topic;
     }
 
+    @Override
+    public String toString() {
+        return "MQTT配置：{" +
+                "server='" + server + '\'' +
+                ", port=" + port +
+                ", clientId='" + clientId + '\'' +
+                ", version=" + version +
+                ", topic='" + topic + '\'' +
+                '}';
+    }
+
 }
