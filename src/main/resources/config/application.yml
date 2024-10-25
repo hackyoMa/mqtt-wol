@@ -1,6 +1,13 @@
 spring:
   application:
     name: mqtt-wol
+  profiles:
+    active: default
+  main:
+    web-application-type: none
   config:
     # Configuration file path
-    import: optional:file:${MQ_CONFIG_FILE:/opt/mqtt_wol/conf.properties}
+    import: optional:file:${CA_CONFIG_FILE:/opt/mqtt_wol/conf.properties}
+  threads:
+    virtual:
+      enabled: true

@@ -7,8 +7,20 @@
 *.properties      text
 *.config          text
 *.pfx             binary
+*.sql             text
 
+*.html            text diff=html
+*.vue             text diff=html
+*.css             text diff=css
+*.js              text
+*.mjs             text
+*.ts              text
 *.json            text
+*.txt             text
+*.png             binary
+*.svg             binary
+*.ico             binary
+*.woff2           binary
 
 .gitattributes    text
 *.*ignore         text

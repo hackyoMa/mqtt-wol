@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:latest
-FROM --platform=$TARGETPLATFORM hackyo/jre:21 AS build
-LABEL maintainer="137120918@qq.com" version="20240426"
+FROM --platform=$TARGETPLATFORM hackyo/debian:bookworm-slim AS build
+LABEL maintainer="137120918@qq.com" version="20241023"
 ENV MQTT_WOL_HOME=/opt/mqtt_wol
-ENV JAVA_APP_JAR=${MQTT_WOL_HOME}/mqtt-wol.jar
-COPY target/mqtt-wol-1.0.0.jar ${MQTT_WOL_HOME}/mqtt-wol.jar
-ENTRYPOINT java -jar ${JAVA_APP_JAR} ${JAVA_OPTIONS}
+ENV EXECUTABLE_FILE=${MQTT_WOL_HOME}/mqtt-wol
+COPY target/mqtt-wol ${EXECUTABLE_FILE}
+ENTRYPOINT ./${EXECUTABLE_FILE}

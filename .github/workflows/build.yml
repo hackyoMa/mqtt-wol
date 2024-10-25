@@ -5,14 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
+        uses: actions/checkout@v4
+      - name: Set up GraalVM JDK 21
+        uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
-          distribution: 'zulu'
+          distribution: 'graalvm'
       - name: Build with Maven
-        run: mvn package
+        run: mvn -Pnative package
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -28,4 +28,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: hackyo/mqtt-wol:1.0.2
+          tags: hackyo/mqtt-wol:2.0.0

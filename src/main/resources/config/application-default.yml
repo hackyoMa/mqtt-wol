@@ -1,10 +1,11 @@
 logging:
+  level:
+    com.github.mqttwol: ${MW_LOG_LEVEL:INFO}
   file:
     name: ${MW_LOG_DIR:/opt/mqtt_wol/logs}/log.log
-  level:
-    root: ${MW_LOG_LEVEL:INFO}
 mqtt:
-  server_uri: ${MW_MQTT_SERVER_URI:tcp://bemfa.com:9501}
+  server: ${MW_MQTT_SERVER:bemfa.com}
+  port: ${MW_MQTT_PORT:9501}
   client_id: ${MW_MQTT_CLIENT_ID:cba8e6b25bb2ad84b9ad132fa8364b83}
   version: ${MW_MQTT_VERSION:3}
   topic: ${MW_MQTT_TOPIC:pc006}

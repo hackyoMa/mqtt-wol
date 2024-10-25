@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a report to help MQTT WOL to improve
+about: Create a report to help Mqtt Wol to improve
 title: "bug: "
 labels: "bug"
 assignees: ""
@@ -8,7 +8,7 @@ assignees: ""
 
 # Bug Report
 
-**MQTT WOL version:**
+**Mqtt Wol version:**
 
 <!-- Please specify commit or tag version. -->
 

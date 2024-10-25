@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If there are any vulnerabilities in **MQTT WOL**, don't hesitate to _report them_.
+If there are any vulnerabilities in **Mqtt Wol**, don't hesitate to _report them_.
 
 1. Send email to: 137120918@qq.com
 2. Describe the vulnerability.
