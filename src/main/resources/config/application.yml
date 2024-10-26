@@ -1,8 +1,6 @@
 spring:
   application:
     name: mqtt-wol
-  profiles:
-    active: default
   main:
     web-application-type: none
   config:
