@@ -1,11 +1,14 @@
 # syntax=docker/dockerfile:latest
-ARG MQTT_WOL_HOME=/opt/mqtt_wol
+ARG MAINTAINER="137120918@qq.com"
+ARG VERSION="20241023"
 
-FROM --platform=$TARGETPLATFORM hackyo/maven:3.9-graalvm-jdk-21 AS builder
-WORKDIR ${MQTT_WOL_HOME}
+ARG PROJECT_HOME=/opt/mqtt_wol
+
+FROM --platform=${TARGETPLATFORM} hackyo/maven:3.9-graalvm-jdk-21 AS builder
+WORKDIR ${PROJECT_HOME}
 COPY . .
 RUN mvn -Pnative package
 
-FROM --platform=$TARGETPLATFORM hackyo/debian:bookworm-slim
-COPY --from=builder ${MQTT_WOL_HOME}/target/mqtt-wol ${MQTT_WOL_HOME}/mqtt-wol
-ENTRYPOINT .${MQTT_WOL_HOME}/mqtt-wol
+FROM --platform=${TARGETPLATFORM} hackyo/debian:bookworm-slim
+COPY --from=builder ${PROJECT_HOME}/target/mqtt-wol ${PROJECT_HOME}/mqtt-wol
+ENTRYPOINT .${PROJECT_HOME}/mqtt-wol
