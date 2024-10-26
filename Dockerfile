@@ -1,5 +1,4 @@
 # syntax=docker/dockerfile:latest
-LABEL maintainer="137120918@qq.com" version="20241023"
 ARG MQTT_WOL_HOME=/opt/mqtt_wol
 
 FROM --platform=$TARGETPLATFORM hackyo/maven:3.9-graalvm-jdk-21 AS builder
