@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:latest
 ARG MAINTAINER="137120918@qq.com"
-ARG VERSION="20241023"
+ARG VERSION="20241028"
 
 ARG PROJECT_HOME=/opt/mqtt_wol
 
