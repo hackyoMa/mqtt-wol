@@ -143,11 +143,6 @@
                                 <phase>test</phase>
                             </execution>
                         </executions>
-                        <configuration>
-                            <buildArgs>
-                                <buildArg>--gc=G1</buildArg>
-                            </buildArgs>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
