@@ -1,12 +1,7 @@
 # syntax=docker/dockerfile:latest
-FROM hackyo/maven:3.9-graalvm-jdk-21 AS builder
+FROM hackyo/jre:21 AS builder
 LABEL maintainer="137120918@qq.com" version="20241023"
-
-WORKDIR /opt/mqtt_wol
-COPY . .
-RUN apt install -y build-essential zlib1g-dev && \
-    mvn -Pnative package
-
-FROM hackyo/debian:bookworm-slim
-COPY --from=builder /opt/mqtt_wol/target/mqtt-wol /opt/mqtt_wol/mqtt-wol
-ENTRYPOINT ["/opt/mqtt_wol/mqtt-wol"]
+ENV APP_HOME=/opt/mqtt_wol
+ENV APP_FILE=${APP_HOME}/app.jar
+COPY target/mqtt-wol-1.0.0-jar-with-dependencies.jar ${APP_FILE}
+ENTRYPOINT ["java", "-jar", "${APP_FILE}", "${JAVA_OPTIONS}"]
