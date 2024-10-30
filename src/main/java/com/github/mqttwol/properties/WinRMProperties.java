@@ -1,62 +1,50 @@
 package com.github.mqttwol.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 /**
  * WinRMProperties
  *
  * @author hackyo
  * @since 2022/4/1
  */
-@ConfigurationProperties("winrm")
-@Component
-public class WinRMProperties {
+public final class WinRMProperties {
 
-    private String address;
-    private Integer port;
-    private String username;
-    private String password;
+    public final static String ADDRESS;
+    public final static Integer PORT;
+    public final static String USERNAME;
+    public final static String PASSWORD;
 
-    public String getAddress() {
-        return address;
+    static {
+        String address = System.getenv("MW_WINRM_ADDRESS");
+        if (address == null || address.isBlank()) {
+            address = "192.168.1.10";
+        }
+        ADDRESS = address;
+
+        String port = System.getenv("MW_WINRM_PORT");
+        if (port == null || port.isBlank()) {
+            port = "5985";
+        }
+        PORT = Integer.parseInt(port);
+
+        String username = System.getenv("MW_WINRM_USERNAME");
+        if (username == null || username.isBlank()) {
+            username = "winrm";
+        }
+        USERNAME = username;
+
+        String password = System.getenv("MW_WINRM_PASSWORD");
+        if (password == null || password.isBlank()) {
+            password = "pa55w0rd!";
+        }
+        PASSWORD = password;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
+    public static String print() {
         return "WinRM配置：{" +
-                "address='" + address + '\'' +
-                ", port=" + port +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                "address='" + ADDRESS + '\'' +
+                ", port=" + PORT +
+                ", username='" + USERNAME + '\'' +
+                ", password='" + PASSWORD + '\'' +
                 '}';
     }
 

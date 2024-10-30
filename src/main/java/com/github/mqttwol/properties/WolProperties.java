@@ -1,42 +1,34 @@
 package com.github.mqttwol.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 /**
  * WolProperties
  *
  * @author hackyo
  * @since 2022/4/1
  */
-@ConfigurationProperties("wol")
-@Component
-public class WolProperties {
+public final class WolProperties {
 
-    private String address;
-    private String macAddress;
+    public final static String ADDRESS;
+    public final static String MAC_ADDRESS;
 
-    public String getAddress() {
-        return address;
+    static {
+        String address = System.getenv("MW_WOL_ADDRESS");
+        if (address == null || address.isBlank()) {
+            address = "192.168.1.10";
+        }
+        ADDRESS = address;
+
+        String macAddress = System.getenv("MW_WOL_MAC_ADDRESS");
+        if (macAddress == null || macAddress.isBlank()) {
+            macAddress = "E8:9C:22:BB:44:A4";
+        }
+        MAC_ADDRESS = macAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getMacAddress() {
-        return macAddress;
-    }
-
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
-    }
-
-    @Override
-    public String toString() {
+    public static String print() {
         return "Wol配置：{" +
-                "address='" + address + '\'' +
-                ", macAddress='" + macAddress + '\'' +
+                "address='" + ADDRESS + '\'' +
+                ", macAddress='" + MAC_ADDRESS + '\'' +
                 '}';
     }
 

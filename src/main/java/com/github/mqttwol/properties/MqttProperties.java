@@ -1,72 +1,58 @@
 package com.github.mqttwol.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 /**
  * MqttProperties
  *
  * @author hackyo
  * @since 2022/4/1
  */
-@ConfigurationProperties("mqtt")
-@Component
-public class MqttProperties {
+public final class MqttProperties {
 
-    private String server;
-    private Integer port;
-    private String clientId;
-    private Integer version;
-    private String topic;
+    public final static String SERVER;
+    public final static Integer PORT;
+    public final static String CLIENT_ID;
+    public final static Integer VERSION;
+    public final static String TOPIC;
 
-    public String getServer() {
-        return server;
+    static {
+        String server = System.getenv("MW_MQTT_SERVER");
+        if (server == null || server.isBlank()) {
+            server = "bemfa.com";
+        }
+        SERVER = server;
+
+        String port = System.getenv("MW_MQTT_PORT");
+        if (port == null || port.isBlank()) {
+            port = "9501";
+        }
+        PORT = Integer.parseInt(port);
+
+        String clientId = System.getenv("MW_MQTT_CLIENT_ID");
+        if (clientId == null || clientId.isBlank()) {
+            clientId = "cba8e6b25bb2ad84b9ad132fa8364b83";
+        }
+        CLIENT_ID = clientId;
+
+        String version = System.getenv("MW_MQTT_VERSION");
+        if (version == null || version.isBlank()) {
+            version = "3";
+        }
+        VERSION = Integer.parseInt(version);
+
+        String topic = System.getenv("MW_MQTT_TOPIC");
+        if (topic == null || topic.isBlank()) {
+            topic = "pc006";
+        }
+        TOPIC = topic;
     }
 
-    public void setServer(String server) {
-        this.server = server;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    @Override
-    public String toString() {
+    public static String print() {
         return "MQTT配置：{" +
-                "server='" + server + '\'' +
-                ", port=" + port +
-                ", clientId='" + clientId + '\'' +
-                ", version=" + version +
-                ", topic='" + topic + '\'' +
+                "server='" + SERVER + '\'' +
+                ", port=" + PORT +
+                ", clientId='" + CLIENT_ID + '\'' +
+                ", version=" + VERSION +
+                ", topic='" + TOPIC + '\'' +
                 '}';
     }
 
