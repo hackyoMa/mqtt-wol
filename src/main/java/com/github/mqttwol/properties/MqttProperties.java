@@ -25,7 +25,11 @@ public final class MqttProperties {
         if (port == null || port.isBlank()) {
             port = "9501";
         }
-        PORT = Integer.parseInt(port);
+        try {
+            PORT = Integer.parseInt(port);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid MW_MQTT_PORT format");
+        }
 
         String clientId = System.getenv("MW_MQTT_CLIENT_ID");
         if (clientId == null || clientId.isBlank()) {
@@ -37,7 +41,11 @@ public final class MqttProperties {
         if (version == null || version.isBlank()) {
             version = "3";
         }
-        VERSION = Integer.parseInt(version);
+        try {
+            VERSION = Integer.parseInt(version);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid MW_MQTT_VERSION format");
+        }
 
         String topic = System.getenv("MW_MQTT_TOPIC");
         if (topic == null || topic.isBlank()) {
@@ -47,7 +55,7 @@ public final class MqttProperties {
     }
 
     public static String print() {
-        return "MQTT配置：" +
+        return "MQTT configuration：" +
                 "server='" + SERVER + '\'' +
                 ", port=" + PORT +
                 ", clientId='" + CLIENT_ID + '\'' +

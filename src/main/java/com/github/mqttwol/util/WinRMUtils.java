@@ -2,6 +2,7 @@ package com.github.mqttwol.util;
 
 import io.cloudsoft.winrm4j.client.WinRmClientContext;
 import io.cloudsoft.winrm4j.winrm.WinRmTool;
+import io.cloudsoft.winrm4j.winrm.WinRmToolResponse;
 
 /**
  * WinRMUtils
@@ -11,16 +12,29 @@ import io.cloudsoft.winrm4j.winrm.WinRmTool;
  */
 public final class WinRMUtils {
 
+    private static final String AUTHENTICATION_SCHEME = "NTLM";
+    private static final String SHUTDOWN_COMMAND = "Stop-Computer";
+
     public static void powerOff(String address, Integer port, String username, String password) {
-        WinRmClientContext context = WinRmClientContext.newInstance();
-        WinRmTool tool = WinRmTool.Builder.builder(address, username, password)
-                .authenticationScheme("NTLM")
-                .port(port)
-                .useHttps(false)
-                .context(context)
-                .build();
-        tool.executeCommand("shutdown -p");
-        context.shutdown();
+        WinRmClientContext context = null;
+        try {
+            context = WinRmClientContext.newInstance();
+            WinRmTool tool = WinRmTool.Builder.builder(address, username, password)
+                    .authenticationScheme(AUTHENTICATION_SCHEME)
+                    .port(port)
+                    .useHttps(false)
+                    .disableCertificateChecks(true)
+                    .context(context)
+                    .build();
+            WinRmToolResponse response = tool.executePs(SHUTDOWN_COMMAND);
+            if (response.getStatusCode() != 0) {
+                throw new RuntimeException("Failed to execute shutdown command: " + response.getStdErr());
+            }
+        } finally {
+            if (context != null) {
+                context.shutdown();
+            }
+        }
     }
 
 }

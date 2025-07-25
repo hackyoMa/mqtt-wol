@@ -24,7 +24,11 @@ public final class WinRMProperties {
         if (port == null || port.isBlank()) {
             port = "5985";
         }
-        PORT = Integer.parseInt(port);
+        try {
+            PORT = Integer.parseInt(port);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid MW_WINRM_PORT format");
+        }
 
         String username = System.getenv("MW_WINRM_USERNAME");
         if (username == null || username.isBlank()) {
@@ -40,7 +44,7 @@ public final class WinRMProperties {
     }
 
     public static String print() {
-        return "WinRM配置：" +
+        return "WinRM configuration：" +
                 "address='" + ADDRESS + '\'' +
                 ", port=" + PORT +
                 ", username='" + USERNAME + '\'' +

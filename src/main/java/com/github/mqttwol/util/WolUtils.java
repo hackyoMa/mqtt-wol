@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.HexFormat;
 
 /**
  * WolUtils
@@ -13,29 +14,29 @@ import java.net.InetAddress;
  */
 public final class WolUtils {
 
-    private static final String MAGIC_PACKET_PREFIX = "FFFFFFFFFFFF";
     private static final int WOL_PORT = 9;
+    private static final int MAC_REPEAT_COUNT = 16;
+    private static final byte[] MAGIC_PACKET_PREFIX = new byte[]{
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF
+    };
 
-    private static byte[] hexToBinary(String hexString) {
-        byte[] result = new byte[hexString.length() / 2];
-        for (int i = 0; i < hexString.length() / 2; i++) {
-            result[i] = (byte) ((hexToDec(hexString.charAt(i + i)) << 4) | (hexToDec(hexString.charAt(i + i + 1))));
+    private static byte[] buildMagicPacket(byte[] macAddressBytes) {
+        byte[] magicPacketBytes = new byte[MAGIC_PACKET_PREFIX.length + MAC_REPEAT_COUNT * macAddressBytes.length];
+        System.arraycopy(MAGIC_PACKET_PREFIX, 0, magicPacketBytes, 0, MAGIC_PACKET_PREFIX.length);
+        int position = MAGIC_PACKET_PREFIX.length;
+        for (int i = 0; i < MAC_REPEAT_COUNT; i++) {
+            System.arraycopy(macAddressBytes, 0, magicPacketBytes, position, macAddressBytes.length);
+            position += macAddressBytes.length;
         }
-        return result;
+        return magicPacketBytes;
     }
 
-    private static byte hexToDec(char c) {
-        return (byte) (c < 'A' ? (c - '0') : (c - 'A' + 10));
-    }
-
-    public static void powerOn(String ipAddress, String macAddress) {
-        macAddress = macAddress.replace("-", "")
-                .replace(":", "")
-                .replace(".", "")
-                .toUpperCase();
-        byte[] magicPacketBytes = hexToBinary(MAGIC_PACKET_PREFIX + macAddress.repeat(16));
+    public static void powerOn(InetAddress ipAddress, String macAddress) {
+        byte[] macAddressBytes = HexFormat.of().parseHex(macAddress);
+        byte[] magicPacketBytes = buildMagicPacket(macAddressBytes);
         try (DatagramSocket socket = new DatagramSocket()) {
-            socket.send(new DatagramPacket(magicPacketBytes, magicPacketBytes.length, InetAddress.getByName(ipAddress), WOL_PORT));
+            socket.setBroadcast(true);
+            socket.send(new DatagramPacket(magicPacketBytes, magicPacketBytes.length, ipAddress, WOL_PORT));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

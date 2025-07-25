@@ -1,5 +1,8 @@
 package com.github.mqttwol.properties;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 /**
  * WolProperties
  *
@@ -8,7 +11,7 @@ package com.github.mqttwol.properties;
  */
 public final class WolProperties {
 
-    public final static String ADDRESS;
+    public final static InetAddress ADDRESS;
     public final static String MAC_ADDRESS;
 
     static {
@@ -16,17 +19,24 @@ public final class WolProperties {
         if (address == null || address.isBlank()) {
             address = "192.168.1.10";
         }
-        ADDRESS = address;
+        try {
+            ADDRESS = InetAddress.getByName(address);
+        } catch (UnknownHostException e) {
+            throw new IllegalArgumentException("Invalid MW_WOL_ADDRESS format");
+        }
 
         String macAddress = System.getenv("MW_WOL_MAC_ADDRESS");
         if (macAddress == null || macAddress.isBlank()) {
             macAddress = "E8:9C:22:BB:44:A4";
         }
-        MAC_ADDRESS = macAddress;
+        MAC_ADDRESS = macAddress.replaceAll("[^A-Fa-f0-9]", "").toUpperCase();
+        if (MAC_ADDRESS.length() != 12) {
+            throw new IllegalArgumentException("Invalid MW_WOL_MAC_ADDRESS format");
+        }
     }
 
     public static String print() {
-        return "Wol配置：" +
+        return "Wol configuration：" +
                 "address='" + ADDRESS + '\'' +
                 ", macAddress='" + MAC_ADDRESS + '\'';
     }

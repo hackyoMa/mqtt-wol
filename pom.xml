@@ -16,11 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mainClass>com.github.mqttwol.Application</mainClass>
         <mica-mqtt.version>2.3.9</mica-mqtt.version>
-        <winrm4j.version>0.12.3</winrm4j.version>
-        <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
-        <jaxb-api.version>2.3.1</jaxb-api.version>
-        <jaxb-impl.version>2.3.9</jaxb-impl.version>
-        <saaj-impl.version>1.5.3</saaj-impl.version>
+        <winrm4j.version>0.13.0-SNAPSHOT</winrm4j.version>
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
     </properties>
 
@@ -37,43 +33,10 @@
             <version>${winrm4j.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>jakarta.xml.bind</groupId>
-                    <artifactId>jakarta.xml.bind-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.xml.messaging.saaj</groupId>
-                    <artifactId>saaj-impl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jvnet.staxex</groupId>
-                    <artifactId>stax-ex</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>${javax.annotation-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${jaxb-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>${jaxb-impl.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.messaging.saaj</groupId>
-            <artifactId>saaj-impl</artifactId>
-            <version>${saaj-impl.version}</version>
         </dependency>
     </dependencies>
 
