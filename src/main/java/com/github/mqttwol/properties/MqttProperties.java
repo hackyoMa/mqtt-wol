@@ -33,7 +33,7 @@ public final class MqttProperties {
 
         String clientId = System.getenv("MW_MQTT_CLIENT_ID");
         if (clientId == null || clientId.isBlank()) {
-            clientId = "cba8e6b25bb2ad84b9ad132fa8364b83";
+            clientId = "cba8e6b25bb2ad84b9ad132fa8364b84";
         }
         CLIENT_ID = clientId;
 

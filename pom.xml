@@ -17,6 +17,7 @@
         <mainClass>com.github.mqttwol.Application</mainClass>
         <mica-mqtt.version>2.3.9</mica-mqtt.version>
         <winrm4j.version>0.13.0-SNAPSHOT</winrm4j.version>
+        <saaj-impl.version>3.0.4</saaj-impl.version>
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
     </properties>
 
@@ -37,6 +38,12 @@
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.messaging.saaj</groupId>
+            <artifactId>saaj-impl</artifactId>
+            <version>${saaj-impl.version}</version>
         </dependency>
     </dependencies>
 

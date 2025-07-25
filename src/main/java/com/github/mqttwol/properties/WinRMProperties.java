@@ -16,7 +16,7 @@ public final class WinRMProperties {
     static {
         String address = System.getenv("MW_WINRM_ADDRESS");
         if (address == null || address.isBlank()) {
-            address = "192.168.1.10";
+            address = "pc.hackyo.cn";
         }
         ADDRESS = address;
 
@@ -32,13 +32,13 @@ public final class WinRMProperties {
 
         String username = System.getenv("MW_WINRM_USERNAME");
         if (username == null || username.isBlank()) {
-            username = "winrm";
+            username = "admin";
         }
         USERNAME = username;
 
         String password = System.getenv("MW_WINRM_PASSWORD");
         if (password == null || password.isBlank()) {
-            password = "pa55w0rd!";
+            password = "F5?72JSp97r:";
         }
         PASSWORD = password;
     }

@@ -13,7 +13,7 @@ import io.cloudsoft.winrm4j.winrm.WinRmToolResponse;
 public final class WinRMUtils {
 
     private static final String AUTHENTICATION_SCHEME = "NTLM";
-    private static final String SHUTDOWN_COMMAND = "Stop-Computer";
+    private static final String SHUTDOWN_COMMAND = "shutdown /s /t 0";
 
     public static void powerOff(String address, Integer port, String username, String password) {
         WinRmClientContext context = null;

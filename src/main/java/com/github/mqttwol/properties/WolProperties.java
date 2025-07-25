@@ -17,7 +17,7 @@ public final class WolProperties {
     static {
         String address = System.getenv("MW_WOL_ADDRESS");
         if (address == null || address.isBlank()) {
-            address = "192.168.1.10";
+            address = "pc.hackyo.cn";
         }
         try {
             ADDRESS = InetAddress.getByName(address);
@@ -27,7 +27,7 @@ public final class WolProperties {
 
         String macAddress = System.getenv("MW_WOL_MAC_ADDRESS");
         if (macAddress == null || macAddress.isBlank()) {
-            macAddress = "E8:9C:22:BB:44:A4";
+            macAddress = "E8:9C:25:DD:55:A4";
         }
         MAC_ADDRESS = macAddress.replaceAll("[^A-Fa-f0-9]", "").toUpperCase();
         if (MAC_ADDRESS.length() != 12) {
