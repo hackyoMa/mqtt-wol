@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mainClass>com.github.mqttwol.Application</mainClass>
         <mica-mqtt.version>2.3.9</mica-mqtt.version>
-        <winrm4j.version>0.13.0-SNAPSHOT</winrm4j.version>
+        <winrm4j.version>0.13.0</winrm4j.version>
         <saaj-impl.version>3.0.4</saaj-impl.version>
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
     </properties>
@@ -29,7 +29,7 @@
         </dependency>
 
         <dependency>
-            <groupId>io.cloudsoft.windows</groupId>
+            <groupId>cn.hackyo</groupId>
             <artifactId>winrm4j</artifactId>
             <version>${winrm4j.version}</version>
             <exclusions>
