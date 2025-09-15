@@ -1,0 +1,10 @@
+[project]
+name = "mqtt-wol"
+version = "2.2.0"
+description = "Receive MQTT messages and invoke WOL"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "paho-mqtt==2.1.0",
+    "pywinrm[credssp,kerberos]==0.5.0",
+]

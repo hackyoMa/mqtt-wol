@@ -1,0 +1,30 @@
+*                 text=auto
+
+*.java            text diff=java
+*.xml             text
+*.yml             text
+*.yaml            text
+*.properties      text
+*.config          text
+*.pfx             binary
+*.sql             text
+
+*.html            text diff=html
+*.vue             text diff=html
+*.css             text diff=css
+*.js              text
+*.mjs             text
+*.ts              text
+*.json            text
+*.txt             text
+*.png             binary
+*.webp            binary
+*.svg             binary
+*.ico             binary
+*.woff2           binary
+
+.gitattributes    text
+*.*ignore         text
+*.md              text diff=markdown
+LICENSE           text
+CODEOWNERS        text
