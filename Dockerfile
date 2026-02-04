@@ -12,7 +12,8 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends gcc python3-dev libkrb5-dev; \
     rm -rf /var/lib/apt/lists/*; \
+    chmod -R 644 /opt/app; \
     uv sync --no-cache
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["uv", "run", "--no-sync", "main.py"]
+CMD uv run --no-sync main.py
