@@ -5,16 +5,14 @@ LABEL maintainer="137120918@qq.com" version="20260204"
 
 WORKDIR /opt/app
 
-COPY pyproject.toml .python-version ./
+COPY pyproject.toml .python-version main.py ./
+COPY app ./app
 
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends gcc python3-dev libkrb5-dev; \
     rm -rf /var/lib/apt/lists/*; \
     uv sync --no-cache
-
-COPY main.py ./
-COPY app ./app
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["uv", "run", "--no-sync", "main.py"]
