@@ -15,5 +15,5 @@ RUN set -eux; \
     chmod -R 755 /opt/app; \
     uv sync --no-cache
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["container-init.sh"]
 CMD uv run --no-sync main.py
