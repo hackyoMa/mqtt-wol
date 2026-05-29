@@ -19,6 +19,6 @@ class MqttConfig(BaseConfig):
         cls.PORT = ConfigManager.get_env_var("MW_MQTT_PORT", 9503, int)
         cls.USE_SSL = ConfigManager.get_env_var("MW_MQTT_USE_SSL", "true", lambda x: x.lower() == "true")
         cls.CLIENT_ID = ConfigManager.get_env_var("MW_MQTT_CLIENT_ID", "00000000000000000000000000000000")
-        cls.VERSION = ConfigManager.get_env_var("MW_MQTT_VERSION", 3, int)
+        cls.VERSION = ConfigManager.get_env_var("MW_MQTT_VERSION", 4, int)
         cls.TOPIC = ConfigManager.get_env_var("MW_MQTT_TOPIC", "pc006")
         cls.print_config_info()

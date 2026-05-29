@@ -83,7 +83,7 @@ class MqttClient:
         signal.signal(signal.SIGTERM, self.graceful_shutdown)
 
         self.client = mqtt.Client(callback_api_version=CallbackAPIVersion.VERSION2, client_id=MqttConfig.CLIENT_ID,
-                                  protocol=mqtt.MQTTv311)
+                                  protocol=MqttConfig.VERSION)
         if MqttConfig.USE_SSL:
             self.client.tls_set()
         self.client.on_connect = self.on_connect
