@@ -18,10 +18,10 @@ def main():
         mqtt_client = MqttClient()
         mqtt_client.init_listener()
     except Exception as e:
-        logger.error(f"Unhandled exception occurred: {str(e)}")
+        logger.error(f"Unhandled exception: {e}")
         sys.exit(1)
     finally:
-        logging.info("Application shutdown complete")
+        logger.info("Application shutdown complete")
 
 
 if __name__ == "__main__":

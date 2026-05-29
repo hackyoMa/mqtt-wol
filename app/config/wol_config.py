@@ -1,3 +1,4 @@
+import binascii
 import logging
 import re
 
@@ -5,10 +6,14 @@ from app.config import ConfigManager, BaseConfig
 
 logger = logging.getLogger(__name__)
 
+MAGIC_PACKET_PREFIX = b"\xFF" * 6
+MAC_REPEAT_COUNT = 16
+
 
 class WolConfig(BaseConfig):
     ADDRESS = None
     MAC_ADDRESS = None
+    MAGIC_PACKET = None
 
     @classmethod
     def initialize(cls):
@@ -19,4 +24,5 @@ class WolConfig(BaseConfig):
         if len(cleaned_mac) != 12:
             raise ValueError("Invalid MW_WOL_MAC_ADDRESS format")
         cls.MAC_ADDRESS = cleaned_mac
+        cls.MAGIC_PACKET = MAGIC_PACKET_PREFIX + binascii.unhexlify(cleaned_mac) * MAC_REPEAT_COUNT
         cls.print_config_info()

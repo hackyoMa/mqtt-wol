@@ -1,6 +1,6 @@
 [project]
 name = "mqtt-wol"
-version = "2.2.0"
+version = "2.5.0"
 description = "Receive MQTT messages and invoke WOL"
 readme = "README.md"
 requires-python = "==3.14"
