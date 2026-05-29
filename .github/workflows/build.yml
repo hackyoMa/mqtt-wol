@@ -21,4 +21,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: hackyo/mqtt-wol:2.4.0
+          tags: hackyo/mqtt-wol:2.5.0
