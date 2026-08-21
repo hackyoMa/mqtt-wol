@@ -1,0 +1,10 @@
+.git
+.github
+.gitattributes
+.gitignore
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+env.list
+LICENSE
+README.md
+SECURITY.md
